@@ -53,3 +53,24 @@ services:
             DB_NAME: ${MONGO_DBNAME}
         depends_on:
             - mongo-api-test-db
+
+
+    api-jest-test:
+        container_name: api-jest-test
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        image: api-jest-test:1.0
+        ports:
+            - 5055:6099
+        environment:
+            HOST: 0.0.0.0
+            API_STAGE: test
+        volumes:
+            - ./api:/home/app
+            - ./api/.aws:/root/.aws
+            - /home/app/node_modules
+        working_dir: /home/app
+        command: serverless offline --state test start
+        depends_on:
+            - mongo-api-test-db

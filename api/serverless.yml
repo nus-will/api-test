@@ -7,7 +7,7 @@ provider:
   memorySize: 128
   timeout: 3
   region: "ap-east-1"
-  stage: "dev"
+  stage: ${opt:state, 'dev'}
   lambdaHashingVersion: 20201221
   versionFunctions: false
   apiGateway:
@@ -15,7 +15,11 @@ provider:
   httpApi:
     cors: true
   environment:
-    NODE_ENV: "dev"
+    NODE_ENV: ${opt:state, 'dev'}
+    MONGO_USER: ${file(./config.${opt:state, 'dev'}.json):MONGO_USER}
+    MONGO_PASSWORD: ${file(./config.${opt:state, 'dev'}.json):MONGO_PASSWORD}
+    MONGO_DB_NAME: ${file(./config.${opt:state, 'dev'}.json):MONGO_DB_NAME}
+    MONGO_HOST: ${file(./config.${opt:state, 'dev'}.json):MONGO_HOST}
 
 functions:
   - "${file(endpoints/hello.yml)}"

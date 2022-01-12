@@ -3,7 +3,7 @@
 const repo = require('../repositories/document');
 const { handleSuccededResponse, handleErrorResponse } = require('../utils');
 
-exports.index = async _event => {
+exports.index = async () => {
   try {
     const { data, error } = await repo.list();
 
@@ -50,7 +50,7 @@ exports.create = async event => {
 exports.update = async event => {
   try {
     const payload = JSON.parse(event.body);
-		const { documentId } = event.pathParameters;
+    const { documentId } = event.pathParameters;
     const { data, error } = await repo.update(documentId, payload);
 
     if (error) {
@@ -65,8 +65,8 @@ exports.update = async event => {
 
 exports.delete = async event => {
   try {
-		const { documentId } = event.pathParameters;
-		const { data, error } = await repo.delete(documentId);
+    const { documentId } = event.pathParameters;
+    const { data, error } = await repo.delete(documentId);
 
     if (error) {
       return handleErrorResponse(error)
@@ -78,9 +78,9 @@ exports.delete = async event => {
   }
 };
 
-exports.deleteAll = async _event => {
+exports.deleteAll = async () => {
   try {
-		const { data, error } = await repo.deleteAll();
+    const { data, error } = await repo.deleteAll();
 
     if (error) {
       return handleErrorResponse(error)

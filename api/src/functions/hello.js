@@ -8,6 +8,6 @@ exports.hello = async event => {
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Credentials": true
 		},
-		"body": JSON.stringify( "Hello World!" )
+		"body": JSON.stringify("Hello World!")
 	};
 };

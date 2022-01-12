@@ -6,66 +6,66 @@ const { ObjectId } = require('mongodb');
 
 exports.create = async (payload) => {
   try {
-		const db = await createConn();
-		const data = await db.collection(COLLECTION_NAME).insert(payload)
+    const db = await createConn();
+    const data = await db.collection(COLLECTION_NAME).insertMany(payload)
 
-		return { data }
+    return { data }
   } catch (error) {
-		return { error }
-	}
+    return { error }
+  }
 };
 
 exports.list = async () => {
   try {
-		const db = await createConn();
-		const data = await db.collection(COLLECTION_NAME).find({}).toArray();
+    const db = await createConn();
+    const data = await db.collection(COLLECTION_NAME).find({}).toArray();
 
-		return { data }
+    return { data }
   } catch (error) {
-		return { error }
-	}
+    return { error }
+  }
 };
 
 exports.get = async (id) => {
   try {
-		const db = await createConn();
-		const data = await db.collection(COLLECTION_NAME).findOne({ _id: ObjectId(id) });
+    const db = await createConn();
+    const data = await db.collection(COLLECTION_NAME).findOne({ _id: ObjectId(id) });
 
-		return { data }
+    return { data }
   } catch (error) {
-		return { error }
-	}
+    return { error }
+  }
 };
 
 exports.update = async (id, payload) => {
   try {
-		const db = await createConn();
-		const data = await db.collection(COLLECTION_NAME).update({ _id: ObjectId(id) }, { $set: payload })
+    const db = await createConn();
+    const data = await db.collection(COLLECTION_NAME).updateOne({ _id: ObjectId(id) }, { $set: payload })
 
-		return { data }
+    return { data }
   } catch (error) {
-		return { error }
-	}
+    return { error }
+  }
 };
 
 exports.delete = async (id) => {
   try {
-		const db = await createConn();
-		const data = await db.collection(COLLECTION_NAME).deleteOne({ _id: ObjectId(id) })
+    const db = await createConn();
+    const data = await db.collection(COLLECTION_NAME).deleteOne({ _id: ObjectId(id) })
 
-		return { data }
+    return { data }
   } catch (error) {
-		return { error }
-	}
+    return { error }
+  }
 };
 
 exports.deleteAll = async () => {
   try {
-		const db = await createConn();
-		const data = await db.collection(COLLECTION_NAME).deleteMany({})
+    const db = await createConn();
+    const data = await db.collection(COLLECTION_NAME).deleteMany({})
 
-		return { data }
+    return { data }
   } catch (error) {
-		return { error }
-	}
+    return { error }
+  }
 }
