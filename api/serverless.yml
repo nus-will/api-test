@@ -14,11 +14,12 @@ provider:
     shouldStartNameWithService: true
   httpApi:
     cors: true
-  environment: 
+  environment:
     NODE_ENV: "dev"
 
 functions:
   - "${file(endpoints/hello.yml)}"
+  - "${file(endpoints/documents.yml)}"
 
 plugins:
   - "serverless-offline"
