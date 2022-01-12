@@ -6,7 +6,7 @@ provider:
   runtime: "nodejs14.x"
   memorySize: 128
   timeout: 3
-  region: "us-east-1"
+  region: "ap-east-1"
   stage: "dev"
   lambdaHashingVersion: 20201221
   versionFunctions: false

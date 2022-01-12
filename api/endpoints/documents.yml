@@ -1,18 +1,24 @@
-get:
-  name: get-document-by-id
-  handler: src/functions/documents/get.get
+index:
+  name: get-all-documents
+  handler: src/functions/documents.index
   events:
     - http:
-        path: documents/{documentId?}
+        path: documents
         method: get
         cors: true
-        request:
-          parameter:
-            documentId: false
+
+get:
+  name: get-a-document
+  handler: src/functions/documents.get
+  events:
+    - http:
+        path: documents/{documentId}
+        method: get
+        cors: true
 
 create:
-  name: create-documents
-  handler: src/functions/documents/create.create
+  name: create-a-document
+  handler: src/functions/documents.create
   events:
     - http:
         path: documents
@@ -20,8 +26,8 @@ create:
         cors: true
 
 update:
-  name: update-documents
-  handler: src/functions/documents/update.update
+  name: update-a-document
+  handler: src/functions/documents.update
   events:
     - http:
         path: documents/{documentId}
@@ -29,13 +35,19 @@ update:
         cors: true
 
 delete:
-  name: delete-documents
-  handler: src/functions/documents/delete.delete
+  name: delete-a-document
+  handler: src/functions/documents.delete
   events:
     - http:
-        path: documents/{documentId?}
+        path: documents/{documentId}
         method: delete
         cors: true
-        request:
-          parameter:
-            documentId: false
+
+deleteAll:
+  name: delete-all-documents
+  handler: src/functions/documents.deleteAll
+  events:
+    - http:
+        path: documents
+        method: delete
+        cors: true
