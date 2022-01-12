@@ -1,13 +1,19 @@
 "use strict";
 
+const repo = require('../../repositories/document');
+const { handleSuccededResponse, handleErrorResponse } = require('../../utils');
+
 exports.create = async event => {
-	return {
-		"statusCode": 200,
-		"headers": {
-			"Content-Type": "application/json",
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Credentials": true
-		},
-		"body": JSON.stringify( "Create!" )
-	};
+  try {
+    const { documents } = JSON.parse(event.body);
+    const { data, error } = await repo.create(documents);
+
+    if (error) {
+      return handleErrorResponse(error)
+    }
+
+    return handleSuccededResponse(data)
+  } catch (e) {
+    return handleErrorResponse(e)
+  }
 };

@@ -1,20 +1,14 @@
-index:
-  name: get-documents
-  handler: src/functions/documents/index.index
-  events:
-    - http:
-        path: documents
-        method: get
-        cors: true
-
 get:
   name: get-document-by-id
   handler: src/functions/documents/get.get
   events:
     - http:
-        path: documents/{documentId}
+        path: documents/{documentId?}
         method: get
         cors: true
+        request:
+          parameter:
+            documentId: false
 
 create:
   name: create-documents
@@ -39,6 +33,9 @@ delete:
   handler: src/functions/documents/delete.delete
   events:
     - http:
-        path: documents/{documentId}
+        path: documents/{documentId?}
         method: delete
         cors: true
+        request:
+          parameter:
+            documentId: false
